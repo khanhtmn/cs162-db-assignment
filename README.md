@@ -14,19 +14,19 @@ As part of your assignment, your must highlight places where you have appropriat
 # Data normalization
 ## First normal form
 Here are the conditions for the first normal form and how my submission fulfills them:
-1. Each row is uniquely defined (primary key): Each table has either a primary key or a composite primary key (table `OfficeArea` and `AgentOffice`) to define the uniqueness of each row.
-1. No groups in each column: Because each agent can belong to multiple offices, I could have created a column in table `Agent` to with a list of offices. However, to fulfill this condition, I create a table `AgentOffice` to map the agents with their respective offices. Same logic applies to table `OfficeArea` because each office is in charge of multiple zipcodes.
-1. Each column has the same type of data: Each column has the same type of data in each table.
+1. __Each row is uniquely defined (primary key)__: Each table has either a primary key or a composite primary key (table `OfficeArea` and `AgentOffice`) to define the uniqueness of each row.
+1. __No groups in each column__: Because each agent can belong to multiple offices, I could have created a column in table `Agent` to with a list of offices. However, to fulfill this condition, I create a table `AgentOffice` to map the agents with their respective offices. Same logic applies to table `OfficeArea` because each office is in charge of multiple zipcodes.
+1. __Each column has the same type of data__: Each column has the same type of data in each table.
   
 ## Second normal form
 Here are the conditions for the second normal form and how my submission fulfills them:
-1. The database needs to be in first normal form: This is already proved by above.
-1. All non-key columns depend on the primary key: At first I store the information of the agents and offices in all 1 table. The primary key was the Office ID. However, because the agent information, such as their names and contact information, is not dependent on the primary key `office_id`, so I split the table into `Office` and `Agent` tables. Same logic was applied to table `House`, `Listing`, and `Sale`. I could have put all information into 1 table, but I assume the company may want to keep track of the information of each house in case it was listed and sold multiple times, so I create the table `House` just to keep track of the information of the house.
+1. __The database needs to be in first normal form__: This is already proved by above.
+1. __All non-key columns depend on the primary key__: At first I store the information of the agents and offices in all 1 table. The primary key was the Office ID. However, because the agent information, such as their names and contact information, is not dependent on the primary key `office_id`, so I split the table into `Office` and `Agent` tables. Same logic was applied to table `House`, `Listing`, and `Sale`. I could have put all information into 1 table, but I assume the company may want to keep track of the information of each house in case it was listed and sold multiple times, so I create the table `House` just to keep track of the information of the house.
 
 ## Third normal form
 Here are the conditions for the third normal form and how my submission fulfills them:
-1. The database needs to be in second normal form: This is already proved by above
-1. All fields can be determined only by the key in the table and no other column: Originally I had the contact details of the agents in each listing because that's how the buyer can contact them. However, I realize that if I know the `agent_id`, I can look up in the `Agent` table and find the rest of the contact details there too. Therefore, I removed the contact details of the `Agent` in the `Listing` table and only left the `agent_id` there. Same logic was applied for the `buyer_id` and buyer details in the `Sale` table.
+1. __The database needs to be in second normal form__: This is already proved by above
+1. __All fields can be determined only by the key in the table and no other column__: Originally I had the contact details of the agents in each listing because that's how the buyer can contact them. However, I realize that if I know the `agent_id`, I can look up in the `Agent` table and find the rest of the contact details there too. Therefore, I removed the contact details of the `Agent` in the `Listing` table and only left the `agent_id` there. Same logic was applied for the `buyer_id` and buyer details in the `Sale` table.
 
 # Indices
 I'm still not sure how robust each field in the table is, but based on the query of the monthly report, I see that we need to filter by date and do a lot of joins on the `listing_id`. Therefore, I created the index for `listing_date`, `selling_date`, and `listing_id` in table `Listing` and table `Sale`. 
