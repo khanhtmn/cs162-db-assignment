@@ -3,12 +3,12 @@ The repo for this assignment is available here: [https://github.com/khanhtmn/cs1
 # How to run the file
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-pip3 install -r requirements.txt
-python3 create.py
-python3 insert_data.py
-python3 query_data.py
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip3 install -r requirements.txt
+$ python3 create.py
+$ python3 insert_data.py
+$ python3 query_data.py
 ```
 
 As part of your assignment, your must highlight places where you have appropriately used data normalization, indices, and transactions. Please draw attention to any areas of your assignment where you have exceeded the requirements of this assignment.
