@@ -1,3 +1,5 @@
+The repo for this assignment is available here: [https://github.com/khanhtmn/cs162-db-assignment](https://github.com/khanhtmn/cs162-db-assignment)
+
 # How to run the file
 
 ```
