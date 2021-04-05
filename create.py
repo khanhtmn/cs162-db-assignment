@@ -3,7 +3,6 @@ from sqlalchemy import create_engine, Column, Text, Integer, ForeignKey, String,
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import Enum
-# from enum import Enum
 from datetime import datetime
 from services import calc_commission
 
@@ -102,13 +101,13 @@ class StatusEnum(Enum):
 
 class Listing(Base):
 	__tablename__ = 'listings'
-	listing_id = Column(Integer, primary_key = True)
+	listing_id = Column(Integer, primary_key = True, index=True)
 	house_id = Column(Integer, ForeignKey('houses.house_id'))
 	seller_id = Column(Integer, ForeignKey('sellers.seller_id'))
 	agent_id = Column(Integer, ForeignKey('agents.agent_id'))
 	office_id = Column(Integer, ForeignKey('offices.office_id'))
 	listing_price = Column(Float(2))
-	listing_date = Column(DateTime)
+	listing_date = Column(DateTime, index=True)
 	status = Column(Enum("available", "sold", name="StatusEnum"), default="available") # Available or Sold - Enum
 	houses = relationship(House)
 	sellers = relationship(Seller)
@@ -124,12 +123,11 @@ class Listing(Base):
 class Sale(Base):
 	__tablename__ = 'sales'
 	sale_id = Column(Integer, primary_key = True)
-	listing_id = Column(Integer, ForeignKey('listings.listing_id'))
+	listing_id = Column(Integer, ForeignKey('listings.listing_id'), index=True)
 	buyer_id = Column(Integer, ForeignKey('buyers.buyer_id'))
 	selling_price = Column(Float(2))
-	selling_date = Column(DateTime)
+	selling_date = Column(DateTime, index=True)
 	commission = Column(Float(2))
-	# commission = Column(Float(2), default=calc_commission(selling_price))
 	listings = relationship(Listing)
 	buyers = relationship(Buyer)
 
